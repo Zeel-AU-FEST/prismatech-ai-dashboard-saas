@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { 
   Card, 
@@ -53,18 +52,18 @@ import {
   UserPlus,
   Mail,
   Phone,
-  Badge,
+  Badge as BadgeIcon,
   PenSquare,
   Building,
   Briefcase,
   Upload,
   Trash,
-  Save
+  Save,
+  Download
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/components/ui/use-toast';
 
-// Team Member component
 const TeamMember = ({ member, isAdmin }: { member: any, isAdmin: boolean }) => {
   return (
     <div className="flex items-center justify-between p-4 border rounded-md">
@@ -79,7 +78,7 @@ const TeamMember = ({ member, isAdmin }: { member: any, isAdmin: boolean }) => {
         </div>
       </div>
       <div className="flex items-center gap-4">
-        <Badge variant="outline" className={
+        <BadgeIcon className={
           member.role === 'Admin' 
             ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' 
             : member.role === 'Analyst'
@@ -87,7 +86,7 @@ const TeamMember = ({ member, isAdmin }: { member: any, isAdmin: boolean }) => {
               : 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
         }>
           {member.role}
-        </Badge>
+        </BadgeIcon>
         
         {isAdmin && (
           <Button variant="ghost" size="sm">
@@ -104,7 +103,6 @@ const Settings = () => {
   const { toast } = useToast();
   const isAdmin = user?.role === 'admin';
   
-  // Profile state
   const [profile, setProfile] = useState({
     name: user?.name || '',
     email: user?.email || '',
@@ -115,7 +113,6 @@ const Settings = () => {
     avatar: null as string | null,
   });
   
-  // Notification settings state
   const [notifications, setNotifications] = useState({
     emailDigest: true,
     campaignAlerts: true,
@@ -124,7 +121,6 @@ const Settings = () => {
     teamActivity: true,
   });
   
-  // GDPR settings state
   const [gdprSettings, setGdprSettings] = useState({
     dataCollection: true,
     cookieUsage: true,
@@ -132,7 +128,6 @@ const Settings = () => {
     marketingEmails: true,
   });
   
-  // Team members (for admin only)
   const teamMembers = [
     {
       id: 1,
@@ -164,7 +159,6 @@ const Settings = () => {
     },
   ];
   
-  // Handle profile update
   const handleProfileUpdate = (e: React.FormEvent) => {
     e.preventDefault();
     toast({
@@ -173,7 +167,6 @@ const Settings = () => {
     });
   };
   
-  // Handle avatar change
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const reader = new FileReader();
@@ -189,7 +182,6 @@ const Settings = () => {
     }
   };
   
-  // Handle notification toggle
   const handleNotificationToggle = (key: keyof typeof notifications) => {
     setNotifications({
       ...notifications,
@@ -202,7 +194,6 @@ const Settings = () => {
     });
   };
   
-  // Handle GDPR toggle
   const handleGdprToggle = (key: keyof typeof gdprSettings) => {
     setGdprSettings({
       ...gdprSettings,
@@ -246,7 +237,6 @@ const Settings = () => {
           )}
         </TabsList>
         
-        {/* Profile Tab */}
         <TabsContent value="profile">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <Card className="md:col-span-2">
@@ -427,7 +417,6 @@ const Settings = () => {
           </div>
         </TabsContent>
         
-        {/* Notifications Tab */}
         <TabsContent value="notifications">
           <Card>
             <CardHeader>
@@ -523,7 +512,6 @@ const Settings = () => {
           </Card>
         </TabsContent>
         
-        {/* Privacy Tab */}
         <TabsContent value="privacy">
           <Card>
             <CardHeader>
@@ -617,7 +605,6 @@ const Settings = () => {
           </Card>
         </TabsContent>
         
-        {/* Team Tab (Admin Only) */}
         {isAdmin && (
           <TabsContent value="team">
             <Card>

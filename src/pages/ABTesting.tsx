@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { 
   Card, 
@@ -36,7 +35,8 @@ import {
   Plus,
   Eye,
   Sparkles,
-  FlaskConical
+  FlaskConical,
+  Check
 } from 'lucide-react';
 import {
   Alert,

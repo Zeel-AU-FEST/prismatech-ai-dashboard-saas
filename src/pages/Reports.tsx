@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { 
   Card, 
@@ -58,7 +57,6 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/components/ui/use-toast';
 
-// Activity Item component
 const ActivityItem = ({ activity }: { activity: any }) => {
   const statusColors = {
     success: 'text-green-600 dark:text-green-400',
@@ -135,7 +133,6 @@ const ActivityItem = ({ activity }: { activity: any }) => {
   );
 };
 
-// AI Summary Card component
 const AISummaryCard = ({ summary }: { summary: any }) => {
   return (
     <Card className="border-prismatech-lime/30 bg-prismatech-lime/5">
@@ -204,7 +201,6 @@ const Reports = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const { toast } = useToast();
   
-  // Mock activity timeline data
   const activityData = [
     {
       id: 1,
@@ -280,7 +276,6 @@ const Reports = () => {
     },
   ];
   
-  // Metrics chart data
   const metricsData = [
     { month: 'Jan', impressions: 320000, clicks: 16000, conversions: 1200 },
     { month: 'Feb', impressions: 350000, clicks: 17500, conversions: 1300 },
@@ -291,7 +286,6 @@ const Reports = () => {
     { month: 'Jul', impressions: 560000, clicks: 28000, conversions: 2100 },
   ];
   
-  // ROI chart data
   const roiData = [
     { month: 'Jan', roi: 1.8 },
     { month: 'Feb', roi: 1.9 },
@@ -302,7 +296,6 @@ const Reports = () => {
     { month: 'Jul', roi: 2.4 },
   ];
   
-  // AI summary data
   const aiSummary = {
     positives: [
       'Email campaigns consistently outperformed industry benchmarks by 18%',
@@ -322,7 +315,6 @@ const Reports = () => {
     ]
   };
   
-  // Filter activities based on period, type, and search
   const filteredActivities = activityData.filter(activity => {
     const matchesPeriod = filterPeriod === 'all' || 
       (filterPeriod === 'today' && activity.time.includes('hours')) ||
@@ -337,7 +329,6 @@ const Reports = () => {
     return matchesPeriod && matchesType && matchesSearch;
   });
   
-  // Handle exporting report
   const handleExport = (format: string) => {
     toast({
       title: "Report exported",
@@ -381,9 +372,7 @@ const Reports = () => {
         </DropdownMenu>
       </div>
       
-      {/* Performance Metrics Charts */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-        {/* Campaign Metrics Chart */}
         <Card>
           <CardHeader>
             <CardTitle>Campaign Metrics</CardTitle>
@@ -403,7 +392,9 @@ const Reports = () => {
                   <Tooltip 
                     formatter={(value, name) => [
                       value.toLocaleString(), 
-                      name.charAt(0).toUpperCase() + name.slice(1)
+                      typeof name === 'string' 
+                        ? name.charAt(0).toUpperCase() + name.slice(1)
+                        : name.toString()
                     ]}
                   />
                   <Legend />
@@ -434,7 +425,6 @@ const Reports = () => {
           </CardContent>
         </Card>
         
-        {/* ROI Trend Chart */}
         <Card>
           <CardHeader>
             <CardTitle>ROI Trend</CardTitle>
@@ -468,12 +458,10 @@ const Reports = () => {
         </Card>
       </div>
       
-      {/* AI Summary */}
       <div className="mb-8">
         <AISummaryCard summary={aiSummary} />
       </div>
       
-      {/* Activity Timeline */}
       <Card>
         <CardHeader>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
