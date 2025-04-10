@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,15 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				prismatech: {
+					blue: '#0077B6',
+					lime: '#9EF01A',
+					bg: '#F5F9FC',
+					text: '#1E1E1E',
+					'chart-blue': '#0077B6',
+					'chart-green': '#34D399',
+					'chart-purple': '#8B5CF6',
 				}
 			},
 			borderRadius: {
